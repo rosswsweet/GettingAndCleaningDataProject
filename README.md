@@ -1,0 +1,1 @@
+The data in this repository is in the folder UCI HAR Dataset. The R script run_analysis.R will read in the data from the folder and output a text file with a clean and summarized data set. The documentation for the script can be found in the CodeBook.md file.

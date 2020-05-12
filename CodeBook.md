@@ -1,0 +1,13 @@
+The data are obtained from the University of California Irvine Machine Learning Repository (documentation at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones). The data set is the Human Activity Recognition Using Smartphones Data Set, which represents time series measurements and statistics for 561 variables, collected for 30 subjects wearing a smartphone during classified activities. The data are separated into train and test sets, formatted as text files, and the documentation includes text files with labels for activities, variables, and subjects.
+
+Since we are focused on organizing and cleaning the data, we will combine the train and test sets. The train and test set folders contain files named "x_[set]" and "y_[set]", where the "x" file contains the measurements and statistics while the "y" file contains the code for the activity. These are read into R, along with the activity, variable, and subject lables.
+
+We next define variable names in the data frames we have read into R. The activity and subject data frames are named manually, and the variable names for the measurements and statistics are pulled from the features data frame, whose second column is the names of each measurement and statistic.
+
+Then, the test and train measurement and statistics data frames are binded by columns to the respective subject and activity data frames. These new data frames, trainLabeled and testLabeled contain all observations of the 561 measurements and statistics along with the associated activity and subject. Finally, these two data frames are binded by rows into a data frame, allData, which contains the combined test and train data.
+
+However, some variable columns are duplicated in the data set. These are duplicate columns are removed, and the resulting data frame named allDataUnique.
+
+For our purposes, we only require the measurement columns pertaining to means and standard deviations. These columns are selected using regular expressions, and we then rename these columns to remove parentheses and hyphens. In addition, we also convert the subject and activity variables to factors, and we set the activity factor labels using the second column of the actLabels data frame that was read in. Functions from the dplyr package (part of the tidyverse package) along with the pipe operator are used to carry out this cleaning.
+
+With the activity and subject columns now formatted as factors, we can group the data frame by these variables and compute the mean of each variable for all combinations of activity and subject. These means are recorded in the DataMeans data frame.
